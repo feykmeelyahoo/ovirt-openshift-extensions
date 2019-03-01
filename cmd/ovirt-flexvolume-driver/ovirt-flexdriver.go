@@ -32,7 +32,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	"github.com/ovirt/ovirt-openshift-extensions/internal"
+	"github.com/feykmeelyahoo/ovirt-openshift-extensions/internal"
 )
 
 const usage = `Usage:

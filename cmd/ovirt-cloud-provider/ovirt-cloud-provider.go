@@ -14,7 +14,7 @@ import (
 	"k8s.io/kubernetes/pkg/cloudprovider"
 	"k8s.io/kubernetes/pkg/controller"
 
-	"github.com/ovirt/ovirt-openshift-extensions/internal"
+	"github.com/feykmeelyahoo/ovirt-openshift-extensions/internal"
 )
 
 // ProviderName is the canonical name the plugin will register under. It must be different the the in-tree

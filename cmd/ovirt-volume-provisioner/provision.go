@@ -21,14 +21,14 @@ import (
 	"strconv"
 
 	"github.com/golang/glog"
-	"github.com/kubernetes-incubator/external-storage/lib/controller"
+	"github.com/kubernetes-sigs/sig-storage-lib-external-provisioner/controller"
 	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/kubernetes/pkg/kubelet/apis"
 
-	"github.com/ovirt/ovirt-openshift-extensions/internal"
+	"github.com/feykmeelyahoo/ovirt-openshift-extensions/internal"
 )
 
 const (

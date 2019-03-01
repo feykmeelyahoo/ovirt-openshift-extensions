@@ -18,8 +18,7 @@ package main
 
 import (
 	"encoding/json"
-
-	"github.com/ovirt/ovirt-openshift-extensions/internal"
+	"github.com/feykmeelyahoo/ovirt-openshift-extensions/internal"
 )
 
 var attachJson = `{
