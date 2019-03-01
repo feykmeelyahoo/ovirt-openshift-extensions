@@ -1,4 +1,5 @@
 *.ca
+*.swp
 *.retry
 deployment/*.retry
 /ovirt-flexvolume-driver
