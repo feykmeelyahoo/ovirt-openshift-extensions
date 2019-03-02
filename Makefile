@@ -82,8 +82,7 @@ deps:
 tarball: $(TARBALL)
 
 $(TARBALL):
-	/bin/git archive --format=tar.gz > $(TARBALL)
-	#/bin/git archive --format=tar.gz HEAD > $(TARBALL)
+	/bin/git archive --format=tar.gz HEAD > $(TARBALL)
 
 apb_build:
 	$(MAKE) -C deployment/ovirt-flexvolume-driver-apb/ \
