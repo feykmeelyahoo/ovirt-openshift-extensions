@@ -26,12 +26,8 @@ LABEL   com.redhat.component="ovirt-openshift-extensions" \
         summary="ovirt-volume-provisioner for openshift, for dynamic volume provisioning" \
         maintainer="Roy Golan <rgolan@redhat.com>"
 
-#SERKAN RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
-#SERKAN WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
-#SERKAN ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
-
-RUN mkdir -p /root/serkan
-WORKDIR /root/serkan
+RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
+WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
 ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
 
 #SERKAN RUN yum install -y epel-release --enablerepo=extras && \
