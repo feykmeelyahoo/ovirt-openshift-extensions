@@ -31,7 +31,7 @@ containers = \
 	$(binaries)
 
 $(binaries): internal
-	go vet ./cmd/$@ && \
+	GO111MODULE=on go vet ./cmd/$@ && \
 	$(COMMON_ENV) $(GOBUILD) \
     	$(COMMON_GO_BUILD_FLAGS) \
     	-o $(PREFIX)/$@ \
