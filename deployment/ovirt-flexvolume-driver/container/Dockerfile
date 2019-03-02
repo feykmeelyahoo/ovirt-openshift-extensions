@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM centos:7.6.1810
+# FROM centos:7.6.1810
+FROM feykmeelcentos:v1
 
 ARG VERSION
 ARG RELEASE
@@ -24,10 +25,9 @@ LABEL   com.redhat.component="ovirt-openshift-extensions" \
         architecture="x86_64" \
         summary="ovirt-flexvolume-driver for openshift, for dynamic volume provisioning" \
         maintainer="Roy Golan <rgolan@redhat.com>"
-
-RUN yum install -y epel-release --enablerepo=extras && \
-    yum install -y --enablerepo=extras golang make &&  \
-    yum clean all && rm -rf /var/cache/yum
+#SERKAN RUN yum install -y epel-release --enablerepo=extras && \
+#SERKAN     yum install -y --enablerepo=extras golang make &&  \
+#SERKAN     yum clean all && rm -rf /var/cache/yum
 
 RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
 WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions

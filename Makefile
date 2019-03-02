@@ -39,7 +39,7 @@ $(binaries): internal
 
 .PHONY: internal
 internal:
-	go vet ./internal
+	GO111MODULE=on go vet ./internal
 
 
 container-%: DIR=.
@@ -70,7 +70,7 @@ push-containers: $(addprefix container-push-, $(containers))
 
 test:
 	$(GOTEST) -v ./... -coverprofile=coverage.out
-	go tool cover -html=coverage.out -o /tmp/coverage.html
+	GO111MODULE=on go tool cover -html=coverage.out -o /tmp/coverage.html
 
 clean:
 	$(GOCLEAN)
