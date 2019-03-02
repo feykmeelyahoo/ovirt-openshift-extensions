@@ -32,7 +32,9 @@ containers = \
 
 #SERKAN CIKARTTIM	GO111MODULE=on go vet ./cmd/$@ -mod=vendor&& \
 
-$(binaries): internal
+#SERKAN CIKARTTIM $(binaries): internal
+
+$(binaries):
 	$(COMMON_ENV) $(GOBUILD) \
     	$(COMMON_GO_BUILD_FLAGS) \
     	-o $(PREFIX)/$@ \
