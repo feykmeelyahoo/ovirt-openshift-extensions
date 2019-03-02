@@ -30,8 +30,9 @@ binaries = \
 containers = \
 	$(binaries)
 
+#SERKAN CIKARTTIM	GO111MODULE=on go vet ./cmd/$@ -mod=vendor&& \
+
 $(binaries): internal
-	GO111MODULE=on go vet ./cmd/$@ -mod=vendor&& \
 	$(COMMON_ENV) $(GOBUILD) \
     	$(COMMON_GO_BUILD_FLAGS) \
     	-o $(PREFIX)/$@ \
