@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM centos:7.6.1810
+#SERKAN FROM centos:7.6.1810
+FROM feykmeel/centos:v1
 
 ARG VERSION
 ARG RELEASE
@@ -25,13 +26,17 @@ LABEL   com.redhat.component="ovirt-openshift-extensions" \
         summary="ovirt-volume-provisioner for openshift, for dynamic volume provisioning" \
         maintainer="Roy Golan <rgolan@redhat.com>"
 
-RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
-WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
+#SERKAN RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
+#SERKAN WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
+#SERKAN ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
+
+RUN mkdir -p /root/serkan
+WORKDIR /root/serkan
 ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
 
-RUN yum install -y epel-release --enablerepo=extras && \
-    yum install -y --enablerepo=extras golang make &&  \
-    yum clean all && rm -rf /var/cache/yum
+#SERKAN RUN yum install -y epel-release --enablerepo=extras && \
+#SERKAN     yum install -y --enablerepo=extras golang make &&  \
+#SERKAN     yum clean all && rm -rf /var/cache/yum
 
 RUN make ovirt-volume-provisioner
 

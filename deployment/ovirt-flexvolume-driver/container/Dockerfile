@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # FROM centos:7.6.1810
-FROM feykmeelcentos:v1
+FROM feykmeel/centos:v1
 
 ARG VERSION
 ARG RELEASE
