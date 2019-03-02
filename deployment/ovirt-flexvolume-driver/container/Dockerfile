@@ -25,13 +25,13 @@ LABEL   com.redhat.component="ovirt-openshift-extensions" \
         summary="ovirt-flexvolume-driver for openshift, for dynamic volume provisioning" \
         maintainer="Roy Golan <rgolan@redhat.com>"
 
-RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
-WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
-ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
-
 RUN yum install -y epel-release --enablerepo=extras && \
     yum install -y --enablerepo=extras golang make &&  \
     yum clean all && rm -rf /var/cache/yum
+
+RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
+WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
+ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
 
 RUN make ovirt-flexvolume-driver
 # SERKAN ADD ovirt-flexvolume-driver .
