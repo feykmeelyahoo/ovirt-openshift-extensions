@@ -31,7 +31,7 @@ containers = \
 	$(binaries)
 
 $(binaries): internal
-	GO111MODULE=on go vet ./cmd/$@ && \
+	GO111MODULE=on go vet ./cmd/$@ -mod=vendor&& \
 	$(COMMON_ENV) $(GOBUILD) \
     	$(COMMON_GO_BUILD_FLAGS) \
     	-o $(PREFIX)/$@ \
@@ -39,7 +39,7 @@ $(binaries): internal
 
 .PHONY: internal
 internal:
-	GO111MODULE=on go vet ./internal
+	GO111MODULE=on go vet ./internal -mod=vendor
 
 
 container-%: DIR=.
