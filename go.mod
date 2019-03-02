@@ -75,4 +75,4 @@ require (
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 
-replace github.com/feykmeelyahoo/ovirt-openshift-extensions/internal v0.0.4 => ./internal
+// replace github.com/feykmeelyahoo/ovirt-openshift-extensions/internal v0.0.4 => ./internal
