@@ -36,17 +36,16 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20120707110453-a547fc61f48d // indirect
-	github.com/onsi/ginkgo v1.7.0
-	github.com/onsi/gomega v1.4.3
+	github.com/onsi/ginkgo v1.7.0 // indirect
+	github.com/onsi/gomega v1.4.3 // indirect
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
-	github.com/ovirt/ovirt-openshift-extensions v0.3.2
+	github.com/ovirt/ovirt-openshift-extensions v0.3.2 // indirect
 	github.com/pborman/uuid v1.2.0 // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
 	github.com/prometheus/client_golang v0.9.2 // indirect
 	github.com/rubiojr/go-vhd v0.0.0-20160810183302-0bfd3b39853c // indirect
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spf13/cobra v0.0.3 // indirect
-	github.com/spf13/pflag v1.0.3
 	github.com/spf13/viper v1.3.1
 	github.com/vmware/govmomi v0.20.0 // indirect
 	github.com/vmware/photon-controller-go-sdk v0.0.0-20171012155938-e3620ad3ad39 // indirect
@@ -56,7 +55,7 @@ require (
 	golang.org/x/time v0.0.0-20181108054448-85acf8d2951c // indirect
 	google.golang.org/api v0.1.0 // indirect
 	google.golang.org/grpc v1.19.0 // indirect
-	gopkg.in/gcfg.v1 v1.2.3
+	gopkg.in/gcfg.v1 v1.2.3 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.3.0 // indirect

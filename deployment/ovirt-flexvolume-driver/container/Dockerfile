@@ -29,12 +29,13 @@ RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
 WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
 ADD ovirt-openshift-extensions-$VERSION-$RELEASE.tar.gz .
 
-# SERKAN RUN yum install -y epel-release --enablerepo=extras && \
-# SERKAN     yum install -y --enablerepo=extras golang make &&  \
-# SERKAN     yum clean all && rm -rf /var/cache/yum
+RUN yum install -y epel-release --enablerepo=extras && \
+    yum install -y --enablerepo=extras golang make &&  \
+    yum clean all && rm -rf /var/cache/yum
 
-# SERKAN RUN make ovirt-flexvolume-driver
-ADD ovirt-flexvolume-driver .
+RUN make ovirt-flexvolume-driver
+# SERKAN ADD ovirt-flexvolume-driver .
+
 #TODO use multi-stage when buildah runs in mock or docker 1.17 is available
 RUN cp -v ovirt-flexvolume-driver /usr/bin/
 RUN cp -v deployment/ovirt-flexvolume-driver/entrypoint.sh /
