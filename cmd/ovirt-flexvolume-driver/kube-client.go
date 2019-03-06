@@ -25,12 +25,13 @@ import (
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
+//	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/kubernetes/pkg/util/file"
+	"k8s.io/client-go/rest"
 )
 
 func getSystemUUIDByNodeName(nodeName string) (string, error) {
-	fmt.Printf("SERKAN -- getSystemUUIDByNodeName - node name %s was not found", nodeName)
+	fmt.Printf("SERKAN -- getSystemUUIDByNodeName - node name %s. \n", nodeName)
 	nodes, e := getKubeNodes()
 	if e != nil {
 		return "", e
@@ -44,21 +45,21 @@ func getSystemUUIDByNodeName(nodeName string) (string, error) {
 }
 
 func getKubeNodes() ([]v1.Node, error) {
-	kubeconfig, err := locateKubeConfig()
+	config, err := sblocateKubeConfig()
 
         fmt.Printf("SERKAN -- getKubeNodes !!!")
-        fmt.Printf("SERKAN -- getKubeNodes  kubeConfig => %s", kubeconfig)
+        fmt.Printf("SERKAN -- getKubeNodes  config => %s. \n", config)
 
 	if err != nil {
 		return nil, err
 	}
-
+/*
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
 		return nil, err
 	}
-
+*/
 	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
 	if err != nil {
@@ -72,6 +73,20 @@ func getKubeNodes() ([]v1.Node, error) {
 	return nodes.Items, nil
 }
 
+/////////////////////////////// SERKAN ////////////////
+func sblocateKubeConfig() (*rest.Config, error) {
+	fmt.Printf("SERKAN -- sblocateKubeConfig !!!. \n")
+	config, err := rest.InClusterConfig()
+	if err != nil {
+		fmt.Printf("SERKAN -- sblocateKubeConfig - ERROR !!!. \n")
+		panic(err.Error())
+	}
+	fmt.Printf("SERKAN -- sblocateKubeConfig Cikiyoorr  !!!. \n")
+
+	return config, nil
+}
+/////////////////////////////// SERKAN ////////////////
+
 func locateKubeConfig() (string, error) {
 	fmt.Printf("SERKAN -- locateKubeConfig !!!")
 
@@ -79,6 +94,7 @@ func locateKubeConfig() (string, error) {
 	var err = os.ErrNotExist
 	var ok bool
 	if ok, err = file.FileOrSymlinkExists(defaultKubeConfig); ok {
+                fmt.Printf("SERKAN -- locateKubeConfig  defaultKubeConfig  => %s. \n", defaultKubeConfig)
 		return defaultKubeConfig, nil
 	}
 

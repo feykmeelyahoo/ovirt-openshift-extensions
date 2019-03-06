@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # FROM centos:7.6.1810
-FROM feykmeel/centos:v1
+FROM feykmeel/flexdriver:v1
 
 ARG VERSION
 ARG RELEASE
@@ -28,6 +28,7 @@ LABEL   com.redhat.component="ovirt-openshift-extensions" \
 #SERKAN RUN yum install -y epel-release --enablerepo=extras && \
 #SERKAN     yum install -y --enablerepo=extras golang make &&  \
 #SERKAN     yum clean all && rm -rf /var/cache/yum
+RUN rm -rf /root/go/src/github.com/ovirt ovirt-flexvolume-driver
 
 RUN mkdir -p /root/go/src/github.com/ovirt/ovirt-openshift-extensions
 WORKDIR /root/go/src/github.com/ovirt/ovirt-openshift-extensions
