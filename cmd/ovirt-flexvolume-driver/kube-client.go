@@ -30,6 +30,7 @@ import (
 )
 
 func getSystemUUIDByNodeName(nodeName string) (string, error) {
+	fmt.Printf("SERKAN -- getSystemUUIDByNodeName - node name %s was not found", nodeName)
 	nodes, e := getKubeNodes()
 	if e != nil {
 		return "", e
@@ -44,6 +45,9 @@ func getSystemUUIDByNodeName(nodeName string) (string, error) {
 
 func getKubeNodes() ([]v1.Node, error) {
 	kubeconfig, err := locateKubeConfig()
+
+        fmt.Printf("SERKAN -- getKubeNodes !!!")
+        fmt.Printf("SERKAN -- getKubeNodes  kubeConfig => %s", kubeconfig)
 
 	if err != nil {
 		return nil, err
@@ -69,6 +73,8 @@ func getKubeNodes() ([]v1.Node, error) {
 }
 
 func locateKubeConfig() (string, error) {
+	fmt.Printf("SERKAN -- locateKubeConfig !!!")
+
 	defaultKubeConfig := "/etc/origin/master/admin.kubeconfig"
 	var err = os.ErrNotExist
 	var ok bool
