@@ -20,14 +20,15 @@ package main
 import (
 	"fmt"
 	"os"
+	"flag"
 	"path/filepath"
 
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-//	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/kubernetes/pkg/util/file"
-	"k8s.io/client-go/rest"
+//	"k8s.io/client-go/rest"
 )
 
 func getSystemUUIDByNodeName(nodeName string) (string, error) {
@@ -45,21 +46,20 @@ func getSystemUUIDByNodeName(nodeName string) (string, error) {
 }
 
 func getKubeNodes() ([]v1.Node, error) {
-	config, err := sblocateKubeConfig()
+	kubeconfig, err := sblocateKubeConfig()
+
 
         fmt.Printf("SERKAN -- getKubeNodes !!!")
-        fmt.Printf("SERKAN -- getKubeNodes  config => %s. \n", config)
+        fmt.Printf("SERKAN -- getKubeNodes  config => %s. \n", kubeconfig)
 
 	if err != nil {
 		return nil, err
 	}
-/*
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
 		return nil, err
 	}
-*/
 	// create the clientset
 	clientset, err := kubernetes.NewForConfig(config)
 	if err != nil {
@@ -74,16 +74,19 @@ func getKubeNodes() ([]v1.Node, error) {
 }
 
 /////////////////////////////// SERKAN ////////////////
-func sblocateKubeConfig() (*rest.Config, error) {
+func sblocateKubeConfig() (string, error) {
 	fmt.Printf("SERKAN -- sblocateKubeConfig !!!. \n")
-	config, err := rest.InClusterConfig()
-	if err != nil {
-		fmt.Printf("SERKAN -- sblocateKubeConfig - ERROR !!!. \n")
-		panic(err.Error())
+	var kubeconfig *string
+	if home := homeDir(); home != "" {
+		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) absolute path to the kubeconfig file")
+	} else {
+		kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
 	}
-	fmt.Printf("SERKAN -- sblocateKubeConfig Cikiyoorr  !!!. \n")
+	flag.Parse()
 
-	return config, nil
+	fmt.Printf("SERKAN -- sblocateKubeConfig Cıkıyor  !!!. %s ----  \n", kubeconfig)
+
+	return *kubeconfig, nil
 }
 /////////////////////////////// SERKAN ////////////////
 
