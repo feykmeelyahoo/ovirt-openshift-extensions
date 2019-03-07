@@ -31,7 +31,6 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-
 	"github.com/feykmeelyahoo/ovirt-openshift-extensions/internal"
 )
 
@@ -47,11 +46,6 @@ const usage = `Usage:
 `
 
 var driverConfigFile string
-
-/*
-Use the vmId extracted from the OS only for api interaction which doesn't include the nodeName.
-For example Attach/Detach uses the node name, which waitForAttach does not.
- */
 var ovirtVmId string
 
 func main() {
@@ -189,12 +183,7 @@ func Attach(jsonOpts string, nodeName string) (internal.Response, error) {
 		return internal.FailedResponse, e
 	}
 
-	vmId, err := getSystemUUIDByNodeName(nodeName)
-	if err != nil {
-		return internal.FailedResponseFromError(err), err
-	}
-
-	vm, err := ovirt.GetVMById(vmId)
+	vm, err := ovirt.GetVMById(ovirtVmId)
 	// 0. validation - Attach size is legal?
 	// 1. query if the disk exists
 	// 2. if it exist, is it already attached to a VM (perhaps a detach is in progress)
@@ -248,12 +237,7 @@ func IsAttached(jsonOpts string, nodeName string) (internal.Response, error) {
 		return internal.FailedResponse, e
 	}
 
-	vmId, err := getSystemUUIDByNodeName(nodeName)
-	if err != nil {
-		return internal.FailedResponseFromError(err), err
-	}
-
-	vm, err := ovirt.GetVMById(vmId)
+	vm, err := ovirt.GetVMById(ovirtVmId)
 	if err != nil {
 		return internal.FailedResponseFromError(err), err
 	}
@@ -300,12 +284,7 @@ func Detach(volumeName string, nodeName string) (internal.Response, error) {
 
 	ovirtDiskName := fromk8sNameToOvirt(volumeName)
 
-	vmId, err := getSystemUUIDByNodeName(nodeName)
-	if err != nil {
-		return internal.FailedResponseFromError(err), err
-	}
-
-	vm, err := ovirt.GetVMById(vmId)
+	vm, err := ovirt.GetVMById(ovirtVmId)
 	if err != nil {
 		return internal.FailedResponseFromError(err), err
 	}
@@ -586,3 +565,4 @@ func getDeviceInfo(device string) (string, error) {
 	}
 	return string(line), nil
 }
+
